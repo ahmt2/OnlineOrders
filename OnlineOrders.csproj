@@ -220,8 +220,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Ribbon1.resx">
-      <DependentUpon>Ribbon1.cs</DependentUpon>
+    <EmbeddedResource Include="OrdersRibbon.resx">
+      <DependentUpon>OrdersRibbon.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="OnlineOrders_TemporaryKey.pfx" />
     <None Include="packages.config" />
@@ -233,11 +233,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Ribbon1.cs">
+    <Compile Include="OrdersRibbon.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Ribbon1.Designer.cs">
-      <DependentUpon>Ribbon1.cs</DependentUpon>
+    <Compile Include="OrdersRibbon.Designer.cs">
+      <DependentUpon>OrdersRibbon.cs</DependentUpon>
     </Compile>
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>

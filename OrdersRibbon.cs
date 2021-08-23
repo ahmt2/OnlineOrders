@@ -11,7 +11,7 @@ using CsvHelper.Configuration;
 
 namespace OnlineOrders
 {
-    public partial class Ribbon1
+    public partial class OrdersRibbon
     {
         readonly Random rnd = new Random();
         Excel.Workbook wBook;
@@ -85,7 +85,15 @@ namespace OnlineOrders
                 wSheet.get_Range("A1", "E1").Font.Bold = true;
                 reader.Close();
 
+                //Todo: Don't assume the order number will be 4 characters 
                 Product temp;
+                string orderRange;
+                List<string> fileNamesList = new List<string>(openFileDialog1.FileNames);
+                fileNamesList.Sort();
+                string firstFileIndex = fileNamesList[0].Substring(fileNamesList[0].Length - 8, 4);
+                string lastFileIndex = fileNamesList[fileNamesList.Count - 1].Substring(fileNamesList[fileNamesList.Count - 1].Length - 8, 4);
+                orderRange = "Order " + firstFileIndex + "-" + lastFileIndex;
+
                 foreach (String file in openFileDialog1.FileNames)
                 {
                     reader = new StreamReader(file);
@@ -142,6 +150,36 @@ namespace OnlineOrders
             Range xlRange = wSheet.UsedRange;
             xlRange.Copy();
             wordDoc.ActiveWindow.Selection.PasteExcelTable(false, true, false);
+
+            DateTime today = DateTime.Today;
+            object missing = System.Reflection.Missing.Value;
+            foreach (Word.Section section in wordDoc.Sections)
+            {
+                Word.Range headerRange = section.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                headerRange.Fields.Add(headerRange, Word.WdFieldType.wdFieldPage);
+                headerRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                headerRange.Font.Bold = 1;
+                headerRange.Text = "Order123\tHOUSTON STORE\t" + today.ToString("MM.dd.yyyy");
+            }
+            //System.Diagnostics.Debug.WriteLine(ddbPartSelector.SelectedItem.ToString());
+            //https://www.programmersought.com/article/30982190787/
+            object CurrentPage = Word.WdFieldType.wdFieldPage;
+            object TotalPages = Word.WdFieldType.wdFieldNumPages;
+            //open footer
+            applicationWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekCurrentPageFooter;
+            applicationWord.ActiveWindow.Selection.TypeText("Part " + ddbPartSelector.SelectedItem.ToString() + "\tPage ");
+            applicationWord.ActiveWindow.Selection.Fields.Add(applicationWord.ActiveWindow.Selection.Range, ref CurrentPage, ref missing, ref missing);
+            applicationWord.ActiveWindow.Selection.TypeText(" of ");
+            applicationWord.ActiveWindow.Selection.Fields.Add(applicationWord.ActiveWindow.Selection.Range, ref TotalPages, ref missing, ref missing);
+            //close footer
+            applicationWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekMainDocument;
+
+            object filename = @pathForFiles + "\\HoustonStore-Part" + ddbPartSelector.SelectedItem.ToString() + "-" + today.ToString("MM.dd.yyyy") + ".docx";
+            wordDoc.SaveAs2(ref filename);
+            //wordDoc.Close(ref missing, ref missing, ref missing);
+            //wordDoc = null;
+            //applicationWord.Quit(ref missing, ref missing, ref missing);
+            //applicationWord = null;
         }
     }
 }

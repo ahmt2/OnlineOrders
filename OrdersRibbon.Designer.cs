@@ -1,14 +1,14 @@
 ﻿
 namespace OnlineOrders
 {
-    partial class Ribbon1 : Microsoft.Office.Tools.Ribbon.RibbonBase
+    partial class OrdersRibbon : Microsoft.Office.Tools.Ribbon.RibbonBase
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        public Ribbon1()
+        public OrdersRibbon()
             : base(Globals.Factory.GetRibbonFactory())
         {
             InitializeComponent();
@@ -122,9 +122,9 @@ namespace OnlineOrders
 
     partial class ThisRibbonCollection
     {
-        internal Ribbon1 Ribbon1
+        internal OrdersRibbon Ribbon1
         {
-            get { return this.GetRibbon<Ribbon1>(); }
+            get { return this.GetRibbon<OrdersRibbon>(); }
         }
     }
 }
