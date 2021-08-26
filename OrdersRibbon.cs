@@ -8,6 +8,7 @@ using Word = Microsoft.Office.Interop.Word;
 using System.IO;
 using System.Globalization;
 using CsvHelper.Configuration;
+using System.Linq;
 
 namespace OnlineOrders
 {
@@ -18,6 +19,7 @@ namespace OnlineOrders
         Excel.Worksheet wSheet;
         string firstFile;
         string pathForFiles;
+        string orderRange;
         private SortedList<Product, uint> sortedPList = new SortedList<Product, uint>();
 
         private void InitializeOpenFileDialog()
@@ -32,6 +34,28 @@ namespace OnlineOrders
         private void OrdersRibbon_Load(object sender, RibbonUIEventArgs e)
         {
             InitializeOpenFileDialog();
+        }
+
+        /// <summary>
+        /// Find order numbers (first and last) from the file list
+        /// </summary>
+        /// <param name="filePaths"></param>
+        /// <returns></returns>
+        private string GetOrderRange(List<string> filePaths)
+        {
+            string range;
+            filePaths.Sort();
+            //get the file name by splitting using \\, then get numbers and drop the first 6 since they are for date
+            string firstFileName = filePaths[0].Split('\\')[filePaths[0].Split('\\').Length - 1].Split('.')[0];
+            string firstFileIndex = string.Join("", firstFileName.ToCharArray().Where(Char.IsDigit)).Substring(6);
+            range = "Order " + firstFileIndex;
+            if(filePaths.Count > 1)
+            {                
+                string lastPath = filePaths[filePaths.Count - 1].Split('\\')[filePaths[filePaths.Count - 1].Split('\\').Length - 1].Split('.')[0];
+                string lastFileIndex = string.Join("", lastPath.ToCharArray().Where(Char.IsDigit)).Substring(6);
+                range += ("-" + lastFileIndex);
+            }
+            return range;
         }
 
         private void BtnLoadCSVFiles_Click(object sender, RibbonControlEventArgs e)
@@ -85,14 +109,8 @@ namespace OnlineOrders
                 wSheet.get_Range("A1", "E1").Font.Bold = true;
                 reader.Close();
 
-                //Todo: Don't assume the order number will be 4 characters 
                 Product temp;
-                string orderRange;
-                List<string> fileNamesList = new List<string>(openFileDialog1.FileNames);
-                fileNamesList.Sort();
-                string firstFileIndex = fileNamesList[0].Substring(fileNamesList[0].Length - 8, 4);
-                string lastFileIndex = fileNamesList[fileNamesList.Count - 1].Substring(fileNamesList[fileNamesList.Count - 1].Length - 8, 4);
-                orderRange = "Order " + firstFileIndex + "-" + lastFileIndex;
+                orderRange = GetOrderRange(new List<string>(openFileDialog1.FileNames));
 
                 foreach (String file in openFileDialog1.FileNames)
                 {
@@ -159,7 +177,7 @@ namespace OnlineOrders
                 headerRange.Fields.Add(headerRange, Word.WdFieldType.wdFieldPage);
                 headerRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify;
                 headerRange.Font.Bold = 1;
-                headerRange.Text = "Order123\tHOUSTON STORE\t" + today.ToString("MM.dd.yyyy");
+                headerRange.Text = orderRange + "\tHOUSTON STORE\t" + today.ToString("MM.dd.yyyy");
             }
             //System.Diagnostics.Debug.WriteLine(ddbPartSelector.SelectedItem.ToString());
             //https://www.programmersought.com/article/30982190787/
