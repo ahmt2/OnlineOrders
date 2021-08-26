@@ -46,13 +46,14 @@ namespace OnlineOrders
             string range;
             filePaths.Sort();
             //get the file name by splitting using \\, then get numbers and drop the first 6 since they are for date
+            int DATE_LENGTH = 6;
             string firstFileName = filePaths[0].Split('\\')[filePaths[0].Split('\\').Length - 1].Split('.')[0];
-            string firstFileIndex = string.Join("", firstFileName.ToCharArray().Where(Char.IsDigit)).Substring(6);
+            string firstFileIndex = string.Join("", firstFileName.ToCharArray().Where(Char.IsDigit)).Substring(DATE_LENGTH);
             range = "Order " + firstFileIndex;
             if(filePaths.Count > 1)
             {                
                 string lastPath = filePaths[filePaths.Count - 1].Split('\\')[filePaths[filePaths.Count - 1].Split('\\').Length - 1].Split('.')[0];
-                string lastFileIndex = string.Join("", lastPath.ToCharArray().Where(Char.IsDigit)).Substring(6);
+                string lastFileIndex = string.Join("", lastPath.ToCharArray().Where(Char.IsDigit)).Substring(DATE_LENGTH);
                 range += ("-" + lastFileIndex);
             }
             return range;
