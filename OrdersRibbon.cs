@@ -29,7 +29,7 @@ namespace OnlineOrders
             this.openFileDialog1.Title = "Select order file(s)";
         }
 
-        private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
+        private void OrdersRibbon_Load(object sender, RibbonUIEventArgs e)
         {
             InitializeOpenFileDialog();
         }
