@@ -34,7 +34,7 @@ namespace OnlineOrders
             InitializeOpenFileDialog();
         }
 
-        private void BtnOnlineOrders_Click(object sender, RibbonControlEventArgs e)
+        private void BtnLoadCSVFiles_Click(object sender, RibbonControlEventArgs e)
         {
             Excel.Application excelApp =
                 (Excel.Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Excel.Application");

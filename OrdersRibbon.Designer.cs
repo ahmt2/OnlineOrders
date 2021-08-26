@@ -42,7 +42,7 @@ namespace OnlineOrders
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl5 = this.Factory.CreateRibbonDropDownItem();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.btnOnlineOrders = this.Factory.CreateRibbonButton();
+            this.btnLoadCSVFiles = this.Factory.CreateRibbonButton();
             this.ddbPartSelector = this.Factory.CreateRibbonDropDown();
             this.btnGenerate = this.Factory.CreateRibbonButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -58,17 +58,17 @@ namespace OnlineOrders
             // 
             // group1
             // 
-            this.group1.Items.Add(this.btnOnlineOrders);
+            this.group1.Items.Add(this.btnLoadCSVFiles);
             this.group1.Items.Add(this.ddbPartSelector);
             this.group1.Items.Add(this.btnGenerate);
             this.group1.Label = "Store Orders";
             this.group1.Name = "group1";
             // 
-            // btnOnlineOrders
+            // btnLoadCSVFiles
             // 
-            this.btnOnlineOrders.Label = "Load .csv files";
-            this.btnOnlineOrders.Name = "btnOnlineOrders";
-            this.btnOnlineOrders.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.BtnOnlineOrders_Click);
+            this.btnLoadCSVFiles.Label = "Load .csv files";
+            this.btnLoadCSVFiles.Name = "btnLoadCSVFiles";
+            this.btnLoadCSVFiles.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.BtnLoadCSVFiles_Click);
             // 
             // ddbPartSelector
             // 
@@ -114,7 +114,7 @@ namespace OnlineOrders
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnOnlineOrders;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnLoadCSVFiles;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnGenerate;
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown ddbPartSelector;
