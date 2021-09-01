@@ -20,6 +20,7 @@ namespace OnlineOrders
         string firstFile;
         string pathForFiles;
         string orderRange;
+        bool csvFilesLoaded;
         private SortedList<Product, uint> sortedPList = new SortedList<Product, uint>();
 
         private void InitializeOpenFileDialog()
@@ -34,6 +35,7 @@ namespace OnlineOrders
         private void OrdersRibbon_Load(object sender, RibbonUIEventArgs e)
         {
             InitializeOpenFileDialog();
+            csvFilesLoaded = false;
         }
 
         /// <summary>
@@ -157,10 +159,18 @@ namespace OnlineOrders
                     currentRow += 1;
                 }
             }
+            csvFilesLoaded = true;
         }
 
         private void BtnGenerate_Click(object sender, RibbonControlEventArgs e)
         {
+            if(false == csvFilesLoaded)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                    "You should first load a .csv file", "Error", 
+                    System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                return;
+            }
             var applicationWord = new Word.Application
             {
                 Visible = true
@@ -169,6 +179,14 @@ namespace OnlineOrders
             Range xlRange = wSheet.UsedRange;
             xlRange.Copy();
             wordDoc.ActiveWindow.Selection.PasteExcelTable(false, true, false);
+
+            int noOfTables = wordDoc.Tables.Count;
+            if(noOfTables > 0)
+            {   //Tables collection is null at index 0 
+                Word.Table wordTable = wordDoc.Tables[1];
+                wordTable.AllowAutoFit = true;
+                wordTable.AutoFitBehavior(Word.WdAutoFitBehavior.wdAutoFitWindow);
+            }
 
             DateTime today = DateTime.Today;
             object missing = System.Reflection.Missing.Value;
