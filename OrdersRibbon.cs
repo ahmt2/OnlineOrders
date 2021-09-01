@@ -158,8 +158,8 @@ namespace OnlineOrders
                     wSheet.Cells[currentRow, 5] = keyValue.Value;
                     currentRow += 1;
                 }
+                csvFilesLoaded = true;
             }
-            csvFilesLoaded = true;
         }
 
         private void BtnGenerate_Click(object sender, RibbonControlEventArgs e)
