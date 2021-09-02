@@ -10,7 +10,7 @@ namespace OnlineOrders
     {
         private readonly static List<string> sizePrecedence = new List<string> {
                                                 "YS", "YM", "YL", "YXL",
-                                                "2T", "3T", "4T", "5T",
+                                                "2T", "3T", "4T", "5T", "5/6T",
                                                 "3-6M", "6-12M", "12-18M", "18-24M",
                                                 "NB", "6M", "12M", "18M", "24M",
                                                 "XS", "S", "M", "Medium", "L", "XL", "2XL", "3XL", "4XL", "5XL"};
