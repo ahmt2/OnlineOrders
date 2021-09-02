@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Dotfuscated/Map.0.xml
+/Dotfuscated/Map.xml
+/Dotfuscated/OnlineOrders.dll

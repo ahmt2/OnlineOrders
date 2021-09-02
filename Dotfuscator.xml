@@ -22,11 +22,6 @@
   </output>
   <renaming>
     <option>xmlserialization</option>
-    <excludelist>
-      <assembly>
-        <file dir="" name="OnlineOrders.dll" />
-      </assembly>
-    </excludelist>
     <mapping>
       <mapoutput overwrite="false">
         <file dir="${configdir}\Dotfuscated" name="Map.xml" />
@@ -44,6 +39,80 @@
     </referencerulelist>
   </renaming>
   <sos />
+  <extattributes>
+    <extattribute name="PreEmptive.Attributes.DebuggingCheckAttribute">
+      <type name="OnlineOrders.Globals">
+        <method name=".ctor" signature="void()" />
+        <method name="get_Factory" signature="Microsoft.Office.Tools.Excel.ApplicationFactory()" />
+        <method name="set_Factory" signature="void(Microsoft.Office.Tools.Excel.ApplicationFactory)" />
+        <method name="get_Ribbons" signature="OnlineOrders.ThisRibbonCollection()" />
+        <method name="get_ThisAddIn" signature="OnlineOrders.ThisAddIn()" />
+        <method name="set_ThisAddIn" signature="void(OnlineOrders.ThisAddIn)" />
+      </type>
+      <type name="OnlineOrders.OrdersRibbon">
+        <method name=".ctor" signature="void()" />
+        <method name="BtnGenerate_Click" signature="void(object, Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)" />
+        <method name="BtnLoadCSVFiles_Click" signature="void(object, Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)" />
+        <method name="Dispose" signature="void(bool)" />
+        <method name="GetOrderRange" signature="string(System.Collections.Generic.List`1&lt;string&gt;)" />
+        <method name="InitializeComponent" signature="void()" />
+        <method name="InitializeOpenFileDialog" signature="void()" />
+        <method name="OrdersRibbon_Load" signature="void(object, Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs)" />
+      </type>
+      <type name="OnlineOrders.Product">
+        <method name=".cctor" signature="void()" />
+        <method name=".ctor" signature="void(object[])" />
+        <method name=".ctor" signature="void(string, string, string, string)" />
+        <method name="CompareTo" signature="int32(OnlineOrders.Product)" />
+        <method name="Equals" signature="bool(object)" />
+        <method name="GetHashCode" signature="int32()" />
+        <method name="ToString" signature="string()" />
+        <method name="op_GreaterThan" signature="bool(OnlineOrders.Product, OnlineOrders.Product)" />
+        <method name="op_LessThan" signature="bool(OnlineOrders.Product, OnlineOrders.Product)" />
+        <method name="get_Color" signature="string()" />
+        <method name="set_Color" signature="void(string)" />
+        <method name="get_ProductCode" signature="string()" />
+        <method name="set_ProductCode" signature="void(string)" />
+        <method name="get_Size" signature="string()" />
+        <method name="set_Size" signature="void(string)" />
+        <method name="get_Style" signature="string()" />
+        <method name="set_Style" signature="void(string)" />
+      </type>
+      <type name="OnlineOrders.ThisAddIn">
+        <method name=".ctor" signature="void(Microsoft.Office.Tools.Excel.ApplicationFactory, System.IServiceProvider)" />
+        <method name="BeginInitialization" signature="void()" />
+        <method name="BindToData" signature="void()" />
+        <method name="EndInitialization" signature="void()" />
+        <method name="FinishInitialization" signature="void()" />
+        <method name="GetWorksheet" signature="Microsoft.Office.Interop.Excel.Worksheet()" />
+        <method name="Initialize" signature="void()" />
+        <method name="InitializeCachedData" signature="void()" />
+        <method name="InitializeComponents" signature="void()" />
+        <method name="InitializeControls" signature="void()" />
+        <method name="InitializeData" signature="void()" />
+        <method name="InitializeDataBindings" signature="void()" />
+        <method name="InternalStartup" signature="void()" />
+        <method name="IsCached" signature="bool(string)" />
+        <method name="NeedsFill" signature="bool(string)" />
+        <method name="OnShutdown" signature="void()" />
+        <method name="StartCaching" signature="void(string)" />
+        <method name="StopCaching" signature="void(string)" />
+        <method name="ThisAddIn_Shutdown" signature="void(object, System.EventArgs)" />
+        <method name="ThisAddIn_Startup" signature="void(object, System.EventArgs)" />
+      </type>
+      <type name="OnlineOrders.ThisRibbonCollection">
+        <method name=".ctor" signature="void(Microsoft.Office.Tools.Ribbon.RibbonFactory)" />
+        <method name="get_Ribbon1" signature="OnlineOrders.OrdersRibbon()" />
+      </type>
+      <propertylist>
+        <property name="Action" value="Exit" />
+        <property name="ActionProbability" value="1" />
+        <property name="ApplicationNotificationSinkName" value="" />
+        <property name="ApplicationNotificationSinkOwner" value="" />
+        <property name="ApplicationNotificationSinkElement" value="None" />
+      </propertylist>
+    </extattribute>
+  </extattributes>
   <smartobfuscation>
     <smartobfuscationreport verbosity="all" overwrite="false" />
   </smartobfuscation>
