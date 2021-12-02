@@ -1,14 +1,15 @@
-﻿using Microsoft.Office.Tools.Ribbon;
+﻿using CsvHelper.Configuration;
 using Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Tools.Ribbon;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Excel = Microsoft.Office.Interop.Excel;
 using Word = Microsoft.Office.Interop.Word;
-using System.IO;
-using System.Globalization;
-using CsvHelper.Configuration;
-using System.Linq;
 
 namespace OnlineOrders
 {
@@ -40,22 +41,43 @@ namespace OnlineOrders
 
         /// <summary>
         /// Find order numbers (first and last) from the file list
+        /// Order file name format is: YYMMDDsometext1234 so if it's in 
+        /// that format we need to get the order number. If not, no need 
+        /// for an order number. 
         /// </summary>
         /// <param name="filePaths"></param>
         /// <returns></returns>
         private string GetOrderRange(List<string> filePaths)
         {
-            string range;
+            string range = "";
+            string fileName;
             filePaths.Sort();
+            var regex = new Regex(@"[0-9]{6}.+[0-9]{4}");
+            
             //get the file name by splitting using \\, then get numbers and drop the first 6 since they are for date
-            int DATE_LENGTH = 6;
+            int DATE_STR_LENGTH = 6;
             string firstFileName = filePaths[0].Split('\\')[filePaths[0].Split('\\').Length - 1].Split('.')[0];
-            string firstFileIndex = string.Join("", firstFileName.ToCharArray().Where(Char.IsDigit)).Substring(DATE_LENGTH);
+            bool nonMatchingNameExists = false;
+            foreach(String filePath in filePaths)
+            {
+                fileName = filePath.Split('\\')[filePaths[0].Split('\\').Length - 1].Split('.')[0];
+                var results = regex.Matches(fileName);
+                if (0 == results.Count)
+                {
+                    nonMatchingNameExists = true;
+                }
+            }
+            
+            if(nonMatchingNameExists)
+            {
+                return range;
+            }
+            string firstFileIndex = string.Join("", firstFileName.ToCharArray().Where(Char.IsDigit)).Substring(DATE_STR_LENGTH);
             range = "Order " + firstFileIndex;
             if(filePaths.Count > 1)
             {                
                 string lastPath = filePaths[filePaths.Count - 1].Split('\\')[filePaths[filePaths.Count - 1].Split('\\').Length - 1].Split('.')[0];
-                string lastFileIndex = string.Join("", lastPath.ToCharArray().Where(Char.IsDigit)).Substring(DATE_LENGTH);
+                string lastFileIndex = string.Join("", lastPath.ToCharArray().Where(Char.IsDigit)).Substring(DATE_STR_LENGTH);
                 range += ("-" + lastFileIndex);
             }
             return range;
