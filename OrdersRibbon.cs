@@ -60,7 +60,7 @@ namespace OnlineOrders
             bool nonMatchingNameExists = false;
             foreach(String filePath in filePaths)
             {
-                fileName = filePath.Split('\\')[filePaths[0].Split('\\').Length - 1].Split('.')[0];
+                fileName = filePath.Split('\\')[filePath.Split('\\').Length - 1].Split('.')[0];
                 var results = regex.Matches(fileName);
                 if (0 == results.Count)
                 {
