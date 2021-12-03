@@ -40,12 +40,16 @@ namespace OnlineOrders
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl3 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl4 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl5 = this.Factory.CreateRibbonDropDownItem();
+            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl6 = this.Factory.CreateRibbonDropDownItem();
+            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl7 = this.Factory.CreateRibbonDropDownItem();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.btnLoadCSVFiles = this.Factory.CreateRibbonButton();
             this.ddbPartSelector = this.Factory.CreateRibbonDropDown();
             this.btnGenerate = this.Factory.CreateRibbonButton();
+            this.cmbbStore = this.Factory.CreateRibbonComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button1 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +65,8 @@ namespace OnlineOrders
             this.group1.Items.Add(this.btnLoadCSVFiles);
             this.group1.Items.Add(this.ddbPartSelector);
             this.group1.Items.Add(this.btnGenerate);
+            this.group1.Items.Add(this.button1);
+            this.group1.Items.Add(this.cmbbStore);
             this.group1.Label = "Store Orders";
             this.group1.Name = "group1";
             // 
@@ -92,9 +98,26 @@ namespace OnlineOrders
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.BtnGenerate_Click);
             // 
+            // cmbbStore
+            // 
+            ribbonDropDownItemImpl6.Label = "Houston";
+            ribbonDropDownItemImpl7.Label = "Online";
+            this.cmbbStore.Items.Add(ribbonDropDownItemImpl6);
+            this.cmbbStore.Items.Add(ribbonDropDownItemImpl7);
+            this.cmbbStore.Label = " Stores";
+            this.cmbbStore.Name = "cmbbStore";
+            this.cmbbStore.ShowItemImage = false;
+            this.cmbbStore.SizeString = "11111111";
+            this.cmbbStore.Text = null;
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // button1
+            // 
+            this.button1.Label = "About";
+            this.button1.Name = "button1";
             // 
             // OrdersRibbon
             // 
@@ -118,6 +141,8 @@ namespace OnlineOrders
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnGenerate;
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown ddbPartSelector;
+        internal Microsoft.Office.Tools.Ribbon.RibbonComboBox cmbbStore;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
     }
 
     partial class ThisRibbonCollection
