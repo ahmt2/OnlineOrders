@@ -243,5 +243,11 @@ namespace OnlineOrders
             //applicationWord.Quit(ref missing, ref missing, ref missing);
             //applicationWord = null;
         }
+
+        private void btnAbout_Click(object sender, RibbonControlEventArgs e)
+        {
+            //Wizard wizard = new Wizard();
+
+        }
     }
 }

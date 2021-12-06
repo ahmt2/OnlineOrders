@@ -49,7 +49,7 @@ namespace OnlineOrders
             this.btnGenerate = this.Factory.CreateRibbonButton();
             this.cmbbStore = this.Factory.CreateRibbonComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = this.Factory.CreateRibbonButton();
+            this.btnAbout = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -65,7 +65,7 @@ namespace OnlineOrders
             this.group1.Items.Add(this.btnLoadCSVFiles);
             this.group1.Items.Add(this.ddbPartSelector);
             this.group1.Items.Add(this.btnGenerate);
-            this.group1.Items.Add(this.button1);
+            this.group1.Items.Add(this.btnAbout);
             this.group1.Items.Add(this.cmbbStore);
             this.group1.Label = "Store Orders";
             this.group1.Name = "group1";
@@ -104,7 +104,7 @@ namespace OnlineOrders
             ribbonDropDownItemImpl7.Label = "Online";
             this.cmbbStore.Items.Add(ribbonDropDownItemImpl6);
             this.cmbbStore.Items.Add(ribbonDropDownItemImpl7);
-            this.cmbbStore.Label = " Stores";
+            this.cmbbStore.Label = " Store";
             this.cmbbStore.Name = "cmbbStore";
             this.cmbbStore.ShowItemImage = false;
             this.cmbbStore.SizeString = "11111111";
@@ -114,10 +114,11 @@ namespace OnlineOrders
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button1
+            // btnAbout
             // 
-            this.button1.Label = "About";
-            this.button1.Name = "button1";
+            this.btnAbout.Label = "About";
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnAbout_Click);
             // 
             // OrdersRibbon
             // 
@@ -142,7 +143,7 @@ namespace OnlineOrders
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnGenerate;
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown ddbPartSelector;
         internal Microsoft.Office.Tools.Ribbon.RibbonComboBox cmbbStore;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnAbout;
     }
 
     partial class ThisRibbonCollection
